@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients Side </title>
+    <style>
+        .marginAuto {
+            margin: auto;
+            width: 90%;
+        }
+
+        .textCenter {
+            text-align: center;
+        }
+
+        .w {
+            width: 70%;
+            margin-top: 10px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="textCenter">Helllo , i'm learning mongoDB </h1>
+    <div class="marginAuto">
+        <form action="/addProduct" method="POST">
+            <label for="name">Name:</label>
+            <input class="w" type="text" id="title" name="name" placeholder="Name"><br> <br>
+
+            <label for="price">Price:</label>
+            <input class="w" type="number" name="price" placeholder="Price"><br> <br>
+
+            <label for="quantity">Quantity</label>
+            <input class="w" type="number" name="quantity" placeholder="Quantity"><br> <br>
+
+            <input class="w" type="submit" value="Add Product">
+        </form>
+    </div>
+
+
+    <div class="marginAuto" id="products">
+
+    </div>
+
+    <script>
+        fetch("/products")
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                const container = document.getElementById("products");
+                data.forEach(pd => {
+                    const p = document.createElement("p");
+                    p.innerHTML = `name : <b> ${pd.name} </b>=> price : ${pd.price}, Quantity : ${pd.quantity} `;
+                    container.appendChild(p)
+                });
+            })
+    </script>
+
+
+</body>
+
+</html>
